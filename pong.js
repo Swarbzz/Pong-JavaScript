@@ -29,10 +29,11 @@ const canvas = document.getElementById('pong');
 const context = canvas.getContext('2d');
 
 const ball = new Ball;
-console.log(ball);
+ball.pos.x = 100;
+ball.pos.y = 50;
 
 context.fillStyle = '#000';
 context.fillRect(0, 0, canvas.clientWidth, canvas.height);
 
 context.fillStyle = '#fff';
-context.fillRect(0, 0, 10, 10);
+context.fillRect(ball.pos.x, ball.pos.y, ball.size.x, ball.size.y);
