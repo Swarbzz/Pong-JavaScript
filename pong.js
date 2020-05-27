@@ -71,6 +71,16 @@ class Pong
       new Player
     ]
 
+    //adding player to the left
+    this.players[0].pos.x = 40;
+    //adding player to the right
+    this.players[1].pos.x = this._canvas.width - 40;
+    //adding both players to the middle 
+    this.players.forEach(player => { 
+      player.pos.y = this._canvas.height /2
+    });
+
+
     let lastTime;
     const callback = (millis) => {
       if (lastTime) {
@@ -93,7 +103,7 @@ class Pong
   drawRect(rect)
   {
     this._context.fillStyle = '#fff';
-    this._context.fillRect(rect.pos.x, rect.pos.y, 
+    this._context.fillRect(rect.left, rect.top, 
                           rect.size.x, rect.size.y);
   }
   update(dt) 
