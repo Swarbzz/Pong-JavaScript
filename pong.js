@@ -41,42 +41,52 @@ class Ball extends Rect
   }
 }
 
+class Pong
+{
+  constructor(canvas)
+  {
+    this._canvas = canvas;
+    this._context = canvas.getContext('2d');
+
+    this.ball = new Ball;
+    this.ball.pos.x = 100;
+    this.ball.pos.y = 50;
+
+    this.ball.vel.x =100;
+    this.ball.vel.y = 100;
+
+    let lastTime;
+    const callback = (millis) => {
+      if (lastTime) {
+        this.update((millis - lastTime) / 1000);
+      }
+      lastTime = millis;
+      requestAnimationFrame(callback);
+    };
+    callback(); 
+
+  }
+  update(dt) {
+    this.ball.pos.x += this.ball.vel.x * dt;
+    this.ball.pos.y += this.ball.vel.y * dt;
+  
+    //adding boundries
+    if (this.ball.left < 0 || this.ball.right > this._canvas.width) {
+      this.ball.vel.x = -this.ball.vel.x;
+    }
+    if (this.ball.top < 0 || this.ball.bottom > this._canvas.height) {
+      this.ball.vel.y = -this.ball.vel.y;
+    }
+  
+    this._context.fillStyle = '#000';
+    this._context.fillRect(0, 0, 
+      this._canvas.clientWidth, this._canvas.height);
+  
+    this._context.fillStyle = '#fff';
+    this._context.fillRect(this.ball.pos.x, this.ball.pos.y, 
+                          this.ball.size.x, this.ball.size.y);
+  }
+}
+
 const canvas = document.getElementById('pong');
-const context = canvas.getContext('2d');
-
-const ball = new Ball;
-ball.pos.x = 100;
-ball.pos.y = 50;
-
-ball.vel.x =100;
-ball.vel.y = 100;
-
-let lastTime;
-function callBack(millis) {
-  if (lastTime) {
-    update((millis - lastTime) / 1000);
-  }
-  lastTime = millis;
-  requestAnimationFrame(callBack);
-}
-
-function update(dt){
-  ball.pos.x += ball.vel.x * dt;
-  ball.pos.y += ball.vel.y * dt;
-
-  //adding boundries
-  if (ball.left < 0 || ball.right > canvas.width) {
-    ball.vel.x = -ball.vel.x;
-  }
-  if (ball.top < 0 || ball.bottom > canvas.height) {
-    ball.vel.y = -ball.vel.y;
-  }
-
-  context.fillStyle = '#000';
-  context.fillRect(0, 0, canvas.clientWidth, canvas.height);
-
-  context.fillStyle = '#fff';
-  context.fillRect(ball.pos.x, ball.pos.y, ball.size.x, ball.size.y);
-}
-
-callBack();
+const pong = new Pong(canvas);
