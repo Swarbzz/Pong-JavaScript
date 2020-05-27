@@ -91,6 +91,14 @@ class Pong
     };
     callback(); 
   }
+  //adding collision between ball and player
+  collide(player, ball)
+  {
+    if (player.left < ball.right && player.right > ball.left && 
+        player.top < ball.bottom && player.bottom > ball.top) {
+          ball.vel.x = -ball.vel.x;
+        }
+  }
   draw()
   {
     this._context.fillStyle = '#000';
@@ -122,6 +130,9 @@ class Pong
     //player 2 follows the ball
     this.players[1].pos.y = this.ball.pos.y;
 
+    //testing collision
+    this.players.forEach(player => this.collide(player, this.ball));
+
     this.draw();
   }
 }
@@ -129,7 +140,7 @@ class Pong
 const canvas = document.getElementById('pong');
 const pong = new Pong(canvas);
 
-//adding player 1 with mouse controls
+//player 1 with mouse controls
 canvas.addEventListener('mousemove', event => {
   pong.players[0].pos.y = event.offsetY;
 });
