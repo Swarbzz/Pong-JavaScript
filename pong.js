@@ -128,3 +128,8 @@ class Pong
 
 const canvas = document.getElementById('pong');
 const pong = new Pong(canvas);
+
+//adding player 1 with mouse controls
+canvas.addEventListener('mousemove', event => {
+  pong.players[0].pos.y = event.offsetY;
+});
