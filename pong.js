@@ -82,7 +82,7 @@ class Pong
     this.players[1].pos.x = this._canvas.width - 40;
     //adding both players to the middle 
     this.players.forEach(player => { 
-      player.pos.y = this._canvas.height /2
+      player.pos.y = this._canvas.height / 2
     });
 
 
@@ -104,6 +104,7 @@ class Pong
     if (player.left < ball.right && player.right > ball.left && 
         player.top < ball.bottom && player.bottom > ball.top) {
           ball.vel.x = -ball.vel.x;
+          ball.vel.len *= 1.10; // increading ball speed by 10% per paddle hit
         }
   }
   draw()
@@ -133,9 +134,9 @@ class Pong
   start() //if the ball is not moving, then move it
   {
     if (this.ball.vel.x === 0 && this.ball.vel.y === 0) {
-      this.ball.vel.x = 200 * (Math.random() > .5 ? 1 : -1) // ball moves in random position after start
-      this.ball.vel.y = 200 * (Math.random() * 2 - 1); // ball moves in a random way after start
-      this.ball.vel.len = 200; //applying consisten speed for the ball
+      this.ball.vel.x = 300 * (Math.random() > .5 ? 1 : -1) // ball moves in random position after start
+      this.ball.vel.y = 300 * (Math.random() * 2 - 1); // ball moves in a random way after start
+      this.ball.vel.len = 300; //applying consisten speed for the ball
     }
   }
   update(dt) 
