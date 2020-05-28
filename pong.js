@@ -123,7 +123,8 @@ class Pong
     if (this.ball.left < 0 || this.ball.right > this._canvas.width) {
       // adding scoring 
       const playerId = this.ball.vel.x < 0 | 0;
-      console.log(playerId)
+      this.players[playerId].score ++;
+      this.reset()
     }
     if (this.ball.top < 0 || this.ball.bottom > this._canvas.height) {
       this.ball.vel.y = -this.ball.vel.y;
