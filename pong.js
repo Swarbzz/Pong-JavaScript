@@ -95,18 +95,39 @@ class Pong
       requestAnimationFrame(callback);
     };
     callback(); 
+
+    this.CHAR_PIXEL = 10
     this.CHARS = [
-    '111101101101111', //0
-    '010010010010010', //1
-    '111001111100111', //2
-    '111001111001111', //3
-    '101101111001001', //4
-    '111100111001111', //5
-    '111100111101111', //6
-    '111001001001001', //7 
-    '111101111101111', //8
-    '111101111001111'  //9
-    ];
+      '111101101101111', //0
+      '010010010010010', //1
+      '111001111100111', //2
+      '111001111001111', //3
+      '101101111001001', //4
+      '111100111001111', //5
+      '111100111101111', //6
+      '111001001001001', //7 
+      '111101111101111', //8
+      '111101111001111'  //9
+    ].map(str => {
+      const canvas = document.createElement('canvas');
+      canvsas.height = this.CHAR_PIXEL * 5;
+      canvas.width = this.CHAR_PIXEL * 3;
+      const context = canvas.getContext('2d');
+      context.fillStyle = '#fff';
+      str.split('').forEach((fill, i) => {
+        if(fill === '1') {
+          context.fillRect(
+            (i % 3) * this.CHAR_PIXEL, 
+            (i / 3 | 0) * this.CHAR_PIXEL, 
+            this.CHAR_PIXEL,
+            this.CHAR_PIXEL);
+            // for every string in this.CHARS we created a new canvas
+            // On each canvas we draw for everyone a white square
+            // it should fill the canvas according to the matrix's numbers
+        }
+      });
+      return canvas;
+    });
 
     this.reset();
   }
