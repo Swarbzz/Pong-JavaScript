@@ -59,11 +59,6 @@ class Pong
     this._context = canvas.getContext('2d');
 
     this.ball = new Ball;
-    this.ball.pos.x = 100;
-    this.ball.pos.y = 50;
-
-    this.ball.vel.x =100;
-    this.ball.vel.y = 100;
 
     //adding 2 new players into an array
     this.players = [
@@ -90,6 +85,8 @@ class Pong
       requestAnimationFrame(callback);
     };
     callback(); 
+
+    this.reset();
   }
   //adding collision between ball and player
   collide(player, ball)
@@ -113,6 +110,15 @@ class Pong
     this._context.fillStyle = '#fff';
     this._context.fillRect(rect.left, rect.top, 
                           rect.size.x, rect.size.y);
+  }
+  reset () 
+  {
+    //ball position
+    this.ball.pos.x = 100;
+    this.ball.pos.y = 50;
+    // speed of the ball
+    this.ball.vel.x = 200;
+    this.ball.vel.y = 200;
   }
   update(dt) 
   {
