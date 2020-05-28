@@ -121,7 +121,13 @@ class Pong
   
     //adding boundries
     if (this.ball.left < 0 || this.ball.right > this._canvas.width) {
-      this.ball.vel.x = -this.ball.vel.x;
+      let playerId;
+      if (this.ball.vel.x < 0) { //scoring
+        playerId = 1;
+      } else {
+        playerId = 0;
+      }
+      console.log(playerId)
     }
     if (this.ball.top < 0 || this.ball.bottom > this._canvas.height) {
       this.ball.vel.y = -this.ball.vel.y;
