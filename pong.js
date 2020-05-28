@@ -5,6 +5,16 @@ class Vec
     this.x = x;
     this.y = y;
   }
+  get len()
+  {
+    return Math.sqrt(this.x * this.x + this.y * this.y); //calculate the hypotenuse of a triangle
+  }
+  set len(value)
+  {
+    const fact = value / this.len;
+    this.x *= fact;
+    this.y *= fact;
+  }
 }
 
 class Rect
@@ -120,11 +130,12 @@ class Pong
     this.ball.vel.x = 0;
     this.ball.vel.y = 0;
   }
-  start() 
+  start() //if the ball is not moving, then move it
   {
     if (this.ball.vel.x === 0 && this.ball.vel.y === 0) {
-      this.ball.vel.x = 200;
-      this.ball.vel.y = 200;
+      this.ball.vel.x = 200 * (Math.random() > .5 ? 1 : -1) // ball moves in random position after start
+      this.ball.vel.y = 200 * (Math.random() * 2 - 1); // ball moves in a random way after start
+      this.ball.vel.len = 200; //applying consisten speed for the ball
     }
   }
   update(dt) 
