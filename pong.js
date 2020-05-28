@@ -95,6 +95,18 @@ class Pong
       requestAnimationFrame(callback);
     };
     callback(); 
+    this.CHARS = [
+    '111101101101111', //0
+    '010010010010010', //1
+    '111001111100111', //2
+    '111001111001111', //3
+    '101101111001001', //4
+    '111100111001111', //5
+    '111100111101111', //6
+    '111001001001001', //7 
+    '111101111101111', //8
+    '111101111001111'  //9
+    ];
 
     this.reset();
   }
@@ -103,8 +115,10 @@ class Pong
   {
     if (player.left < ball.right && player.right > ball.left && 
         player.top < ball.bottom && player.bottom > ball.top) {
+          const len = ball.vel.len;
           ball.vel.x = -ball.vel.x;
-          ball.vel.len *= 1.10; // increading ball speed by 10% per paddle hit
+          ball.vel.y += 300 * (Math.random() - .5); // mix up the horizontal velocity when ball gets hit
+          ball.vel.len = len * 1.10 // increading ball speed by 10% per paddle hit
         }
   }
   draw()
