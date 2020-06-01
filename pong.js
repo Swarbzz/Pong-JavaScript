@@ -220,7 +220,8 @@ const pong = new Pong(canvas);
 
 //player 1 with mouse controls
 canvas.addEventListener('mousemove', event => {
-  pong.players[0].pos.y = event.offsetY;
+  const scale = event.offsetY / event.target.getBoundingClientRect().height;
+  pong.players[0].pos.y = canvas.height * scale;
 });
 //start the game by clicking the left mouse button
 canvas.addEventListener('click', event => {
