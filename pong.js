@@ -110,7 +110,7 @@ class Pong
       '111101111001111'  //9
     ].map(str => {
       const canvas = document.createElement('canvas');
-      canvsas.height = this.CHAR_PIXEL * 5;
+      canvas.height = this.CHAR_PIXEL * 5;
       canvas.width = this.CHAR_PIXEL * 3;
       const context = canvas.getContext('2d');
       context.fillStyle = '#fff';
@@ -150,12 +150,27 @@ class Pong
 
     this.drawRect(this.ball);
     this.players.forEach(player => this.drawRect(player));
+
+    this.drawScore();
   }
   drawRect(rect)
   {
     this._context.fillStyle = '#fff';
     this._context.fillRect(rect.left, rect.top, 
                           rect.size.x, rect.size.y);
+  }
+  drawScore()
+  {
+    const align = this._canvas.width / 3;
+    const CHAR_W = this.CHAR_PIXEL * 4;
+    this.players.forEach((player, index) => {
+      const chars = player.score.toString().split('');
+      const offset = align * (index + 1) - (CHAR_W * chars.length /2) + this.CHAR_PIXEL / 2;
+      chars.forEach((char, pos) => {
+        this._context.drawImage(this.CHARS[char | 0],
+          offset + pos * CHAR_W, 20);
+      })
+    })
   }
   reset () 
   {
