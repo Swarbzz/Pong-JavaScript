@@ -6,4 +6,5 @@ Welcome to Pong! The unbeatable game orignally released by Atari in 1972.
 
 ## How to use
 
-Simply clone the repository and open then index.html in your web browser. Warning thouhg, you will never win....
+Open this link on Heroku: https://pong-js-es6.herokuapp.com. 
+Otherwise you can clone this repo and open then index.html in your web browser. Warning though, you will never win....
